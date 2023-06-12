@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Chat Bot</title>
+    <style>
+      body {
+        margin: 0;
+        padding: 0;
+        font-family: Arial, sans-serif;
+      }
+
+      .container {
+        display: flex;
+        flex-direction: column;
+        height: 100vh;
+      }
+
+      .chat {
+        flex: 1;
+        overflow-y: scroll;
+        padding: 10px;
+      }
+
+      .message {
+        margin-bottom: 10px;
+      }
+
+      .user-message {
+        background-color: #f5f5f5;
+        border-radius: 5px;
+        padding: 10px;
+        max-width: 70%;
+        align-self: flex-end;
+      }
+
+      .bot-message {
+        background-color: #dcf8c6;
+        border-radius: 5px;
+        padding: 10px;
+        max-width: 70%;
+        align-self: flex-start;
+      }
+
+      .input-container {
+        display: flex;
+        padding: 10px;
+        background-color: #f5f5f5;
+        border-top: 1px solid #cccccc;
+      }
+
+      .input-container input[type="text"] {
+        flex: 1;
+        margin-right: 10px;
+        border-radius: 5px;
+        border: none;
+        padding: 10px;
+        font-size: 16px;
+      }
+
+      .input-container input[type="submit"] {
+        border-radius: 5px;
+        border: none;
+        background-color: #4caf50;
+        color: #ffffff;
+        padding: 10px;
+        font-size: 16px;
+        cursor: pointer;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="chat" id="chat"></div>
+      <div class="input-container">
+        <input type="text" id="input" placeholder="Type your message here..." />
+        <input type="submit" value="Send" onclick="sendMessage()" />
+      </div>
+    </div>
+
+    <script>
+      function sendMessage() {
+        // Get the user's message from the input field
+        var message = document.getElementById("input").value;
+
+        // Create a new message element for the user's message
+        var userMessageElement = document.createElement("div");
+        userMessageElement.classList.add("message");
+        userMessageElement.classList.add("user-message");
+        userMessageElement.textContent = message;
+
+        // Add the user's message element to the chat
+        var chatElement = document.getElementById("chat");
+        chatElement.appendChild(userMessageElement);
+
+        // Send the user's message to the chatbot and receive a response
+        var botResponse = getBotResponse(message);
+
+        // Create a new message element for the bot's response
+        var botMessageElement = document.createElement("div");
+        botMessageElement.classList.add("message");
+        botMessageElement.classList.add("bot-message");
+        botMessageElement.textContent = botResponse;
+
+        // Add the bot's message element to the chat
+        chatElement.appendChild(botMessageElement);
+
+        // Clear the input field
+        document.getElementById("input").value = "";
+
+        // Scroll to the bottom of the chat
+        chatElement.scrollTop = chatElement.scrollHeight;
+      }
+
+      function getBotResponse(message) {
+        // This function sends the user's message to the chatbot and receives a response
+        // In this example, we'll just echo the user's message back as the bot's response
+        return message;
+      }
+    </script>
+  </body>
+</html>
